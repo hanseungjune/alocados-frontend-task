@@ -39,8 +39,9 @@ const ExchangeHistory = () => {
             </div>
           </StyleExchangeHistoryHeader>
           {/* 최근 순으로 환전 내역 보여주기 */}
-          {history.map((item) => (
+          {history.map((item, index) => (
             <ExchangeHistoryCards
+              key={index}
               regDt={item.regDt}
               fromImg={item.fromImg}
               fromContent={item.fromContent}

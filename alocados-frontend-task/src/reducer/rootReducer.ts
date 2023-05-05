@@ -1,9 +1,9 @@
 // rootReducer.js
 import { combineReducers } from "redux";
-import todosReducer from "./todos";
+import balancesReducer from "./balancesmodules";
 
 const rootReducer = combineReducers({
-  todos: todosReducer,
+  balancesReducer,
 });
 
 export default rootReducer;

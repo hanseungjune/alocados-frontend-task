@@ -1,5 +1,9 @@
 export interface DropDownMenuProps {
   text:string
+  toCoin:string
+  fromCoin:string
+  setToCoin:React.Dispatch<React.SetStateAction<string>>;
+  setFromCoin:React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface ExchangeHistoryCardsProps {
@@ -17,5 +21,15 @@ export interface ExchangeSummaryProps {
 
 export interface ExchangeFromToProps {
   title: string,
-  value: string
+  value: string,
+  toCoin: string,
+  fromCoin: string,
+  setToCoin: React.Dispatch<React.SetStateAction<string>>,
+  setFromCoin: React.Dispatch<React.SetStateAction<string>>,
+  fromValue: number | string,
+  toValue: number | string,
+  setFromValue: React.Dispatch<React.SetStateAction<number | string>>,
+  setToValue: React.Dispatch<React.SetStateAction<number | string>>,
+  error: string,
+  setError: React.Dispatch<React.SetStateAction<string>>,
 }

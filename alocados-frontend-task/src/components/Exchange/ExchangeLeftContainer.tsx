@@ -14,8 +14,9 @@ const ExchangeLeftContainer = () => {
     <>
       <section>
             <h3>요약</h3>
-            {options.map((item) => (
-              <ExchangeSummary 
+            {options.map((item, index) => (
+              <ExchangeSummary
+                key={index} 
                 coinImg={item.coin}
                 coinBalance={item.balance}
               />
