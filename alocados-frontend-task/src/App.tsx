@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Exchange from './routes/Exchange';
-import ExchangeDetail from './routes/ExchangeDetail';
+import ExchangeDetail from './routes/ExchangeHistory';
 
 const GlobalStyle = createGlobalStyle`
   body {

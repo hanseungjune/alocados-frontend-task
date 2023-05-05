@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import AlocadosImg from "../../assets/alocados.svg";
 
+// 색깔
+export const color = {
+  primary: '#fafbfc'
+}
+
 export const StyleNav = styled.nav`
   width: calc(100vw - 6rem);
   padding: 1rem 3rem;
