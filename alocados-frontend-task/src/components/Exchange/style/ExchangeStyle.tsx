@@ -71,7 +71,11 @@ export const StyleExchangeSummaryDiv = styled.div`
   }
 `;
 
-export const StyleExchangeFromDiv = styled.div`
+export interface StyleExchangeFromDivProps {
+  fromValue : any
+}
+
+export const StyleExchangeFromDiv = styled.div<StyleExchangeFromDivProps>`
   display: flex;
   height: 7vh;
   justify-content: space-between;
@@ -95,11 +99,16 @@ export const StyleExchangeFromDiv = styled.div`
   }
 
   & > div:nth-of-type(1):focus-within {
-    outline: 2px solid red;
+    outline: 2px solid rgba(93, 40, 242, 0.24);
+  }
+
+  & > div:nth-of-type(1) {
+    outline: ${props => props.fromValue === '0' ? '2px solid red !important' : 'none'} ;
   }
 
   /* 오른쪽 드롭다운 */
   & > div:nth-of-type(2) {
+    margin-left: 1rem;
     position: relative;
   }
 

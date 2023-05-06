@@ -21,7 +21,10 @@ const ExchangeSummary = ({ coinImg, coinBalance }: ExchangeSummaryProps) => {
         {options.find((option) => option.coin === coinImg)?.name}
       </span>
       <span>
-        {coinBalance.toLocaleString()}{" "}
+        {coinBalance?.toLocaleString(undefined, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 10,
+        })}{" "}
         {options.find((option) => option.coin === coinImg)?.unit}
       </span>
     </StyleExchangeSummaryDiv>

@@ -5,11 +5,14 @@ import BnbImg from "../../assets/bnb.svg";
 import dropImg from "../../assets/dropdown.svg";
 import { MenuItemButton, MenuItemsList, SelectedItemButton } from "./style/DropDownStyle";
 import { DropDownMenuProps } from "./type/ExchangeType";
+import { useSelector } from "react-redux";
 
-const DropDownMenu = ({text, toCoin, fromCoin, setToCoin, setFromCoin}:DropDownMenuProps) => {
+const DropDownMenu = ({text, setToCoin, setFromCoin}:DropDownMenuProps) => {
+  const balances = useSelector((state: any) => state.balancesReducer.balances);
   // 라벨만 뽑아오기
   const [selected, setSelected] = useState<string>("Solana");
   const [isDrop, setIsDrop] = useState<boolean>(false);
+
   const items = [
     { label: "Solana", image: SolImg, unit: 'SOL' },
     { label: "Ethereum", image: EthImg, unit: 'ETH' },
@@ -27,22 +30,28 @@ const DropDownMenu = ({text, toCoin, fromCoin, setToCoin, setFromCoin}:DropDownM
     if (text === 'from') {
       setFromCoin(unit)
     } 
-    // (text === 'to')
     else {
       setToCoin(unit)
     }
   };
 
+  const selectedItem = items.find((item) => item.label === selected);
+
+  useEffect(() => {
+    setSelected('Solana');
+  }, [balances])
+
   return (
     <>
       <SelectedItemButton>
-        <div>
-          <img
-            src={items.find((item) => item.label === selected)?.image}
-            alt={selected}
-          />
-          <span>{selected}</span>
-        </div>
+      <div>
+        {selectedItem && (
+          <>
+            <img src={selectedItem.image} alt={selectedItem.label} />
+            <span>{selectedItem.label}</span>
+          </>
+        )}
+      </div>
         <img src={dropImg} alt="dropImg" onClick={handleDropDown} />
       </SelectedItemButton>
       {isDrop ? (

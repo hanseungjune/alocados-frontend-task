@@ -1,10 +1,10 @@
-import { rest } from 'msw';
+import { rest } from "msw";
 
 // 코인 기본 상태
 const initial_balances: Record<string, number> = {
-  eth: 2000,
-  sol: 0,
-  bnb: 0,
+  ETH: 2000,
+  SOL: 0,
+  BNB: 0,
 };
 let balances: Record<string, number> = { ...initial_balances };
 
@@ -18,40 +18,37 @@ export const exchangeCoinHandler = rest.post<{
   from: string;
   to: string;
   value: number;
-}>("api/exchange", (req, res, ctx) => {
-  console.log(req)
-  console.log(res)
-  console.log(ctx)
+}>("/api/exchange", (req, res, ctx) => {
   // 환전 대상 코인과 값
   const { from, to, value } = req.body;
 
   // 환전 가능 여부 확인(비율 계산)
-  let exchangeRate: Record<string, number> = { eth: 0, sol: 0, bnb: 0 }
-  if (from === 'eth') {
+  let exchangeRate: Record<string, number> = { ETH: 0, SOL: 0, BNB: 0 };
+  if (from === "ETH") {
     exchangeRate = {
-      eth: 1,
-      sol: 0.01,
-      bnb: 0.02,
+      ETH: 1,
+      SOL: 0.01,
+      BNB: 0.02,
     };
-  } else if (from === 'sol') {
+  } else if (from === "SOL") {
     exchangeRate = {
-      eth: 100,
-      sol: 1,
-      bnb: 2,
-    }
-  } else if (from === 'bnb') {
+      ETH: 100,
+      SOL: 1,
+      BNB: 2,
+    };
+  } else if (from === "BNB") {
     exchangeRate = {
-      sol: 0.5,
-      eth : 50,
-      bnb: 1
-    }
+      ETH: 50,
+      SOL: 0.5,
+      BNB: 1,
+    };
   }
 
   // 환전해서 들어갈 금액(코인)
-  const exchangeValue = exchangeRate[to] / exchangeRate[from] * value;
-  // 보낼 코인이 적을때, 
+  const exchangeValue = (exchangeRate[from] / exchangeRate[to]) * value;
+  // 보낼 코인이 적을때,
   if (balances[from] < value) {
-    return res(ctx.status(400), ctx.json({ message: '잔액이 부족합니다.'}));
+    return res(ctx.status(400), ctx.json({ message: "잔액이 부족합니다." }));
   }
 
   // 잔액 업데이트
@@ -62,9 +59,9 @@ export const exchangeCoinHandler = rest.post<{
   return res(
     ctx.status(200),
     ctx.json({
-      message: '환전이 완료되었습니다.',
+      message: "환전이 완료되었습니다.",
       balances,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toString(),
       from,
       to,
       value,
@@ -72,13 +69,51 @@ export const exchangeCoinHandler = rest.post<{
   );
 });
 
-// 잔액 정보 API
-export const balance_handler = rest.get('/api/balance', (req, res, ctx) => {
-  return res(ctx.status(200), ctx.json({ balances }));
+const historyArray:any[] = [];
+
+// 환전 이력 추가 API
+export const exchangeHistoryHandler = rest.post<{
+  regDt: string;
+  from: string;
+  fromVal: string;
+  to: string;
+  toVal: string;
+}>("/api/history", (req, res, ctx) => {
+  const { regDt, from, fromVal, to, toVal } = req.body;
+
+  const newHistory = { regDt, from, fromVal, to, toVal }
+  historyArray.push(newHistory);
+
+  return res(ctx.status(200), ctx.json({
+    regDt, from, fromVal, to, toVal
+  }))
 });
 
-// 잔액 데이터 초기화 API
-export const reset_balance_handler = rest.post('api/reset', (req, res, ctx) => {
-  balances = { ...initial_balances };
-  return res(ctx.status(200), ctx.json({ message: '잔액이 초기화되었습니다.'}));
+// 환전 이력 조회 API(최신순)
+export const getRecentHistoryHandler = rest.get("/api/history/0", (req, res, ctx) => {
+  // 최신순 정렬
+  historyArray.sort((a, b) => {
+    const dateA = new Date(a.regDt);
+    const dateB = new Date(b.regDt);
+    return dateB.getTime() - dateA.getTime(); 
+  })
+
+  return res(ctx.json(historyArray))
+})
+
+// 환전 이력 조회 API(오래된 순)
+export const getPastHistoryHandler = rest.get("/api/history/1", (req, res, ctx) => {
+  // 오래된순 정렬
+  historyArray.sort((a, b) => {
+    const dateA = new Date(a.regDt);
+    const dateB = new Date(b.regDt);
+    return dateA.getTime() - dateB.getTime(); 
+  })
+
+  return res(ctx.json(historyArray))
+})
+
+// 잔액 정보 API
+export const balance_handler = rest.get("/api/balances", (req, res, ctx) => {
+  return res(ctx.status(200), ctx.json({ balances }));
 });

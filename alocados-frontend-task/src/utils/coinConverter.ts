@@ -1,23 +1,23 @@
 // 환전 가능 여부 확인(비율 계산)
 export const exchange = (from:any, to:any, amount:any) => {
-  let exchangeRate: Record<string, number> = { eth: 0, sol: 0, bnb: 0}
-  if (from === 'eth') {
+  let exchangeRate: Record<string, number> = { ETH: 0, SOL: 0, BNB: 0}
+  if (from === 'ETH') {
     exchangeRate = {
-      eth: 1,
-      sol: 0.01,
-      bnb: 0.02,
+      ETH: 1,
+      SOL: 0.01,
+      BNB: 0.02,
     };
-  }  else if (from === 'sol') {
+  }  else if (from === 'SOL') {
     exchangeRate = {
-      eth: 100,
-      sol: 1,
-      bnb: 2,
+      ETH: 100,
+      SOL: 1,
+      BNB: 2,
     };
-  } else if (from === 'bnb') {
+  } else if (from === 'BNB') {
     exchangeRate = {
-      eth: 50,
-      sol: 0.5,
-      bnb: 1
+      ETH: 50,
+      SOL: 0.5,
+      BNB: 1
     };
   }
 
@@ -25,7 +25,7 @@ export const exchange = (from:any, to:any, amount:any) => {
   return amount * rate;
 }
 
-const convertCoin = (from = "eth", to = "sol", amount = 2000) => {
+const convertCoin = (from = "ETH", to = "SOL", amount = 2000) => {
   let result = exchange(from, to, amount);
   return result;
 }
