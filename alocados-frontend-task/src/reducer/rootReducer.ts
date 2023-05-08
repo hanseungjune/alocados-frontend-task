@@ -2,7 +2,7 @@
 import { combineReducers } from "redux";
 import balancesReducer from "./balanceModules";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   balancesReducer,
 });
 

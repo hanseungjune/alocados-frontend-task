@@ -4,15 +4,8 @@ export interface DropDownMenuProps {
   setFromCoin:React.Dispatch<React.SetStateAction<string>>;
 }
 
-export interface ExchangeHistoryCardsProps {
-  regDt:string,
-  fromImg:any,
-  fromContent:string,
-  toImg:any,
-  toContent:string,
-  timestamp?:string,
-  from?:string,
-  to?:string
+export interface ExchangeRecentHistoryProps {
+  history: any
 }
 
 export interface ExchangeSummaryProps {

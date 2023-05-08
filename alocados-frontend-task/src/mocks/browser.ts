@@ -4,7 +4,6 @@ import {
   balance_handler,
   exchangeHistoryHandler,
   getRecentHistoryHandler,
-  getPastHistoryHandler
 } from "./handlers";
 
 export const worker = setupWorker(
@@ -12,5 +11,4 @@ export const worker = setupWorker(
   balance_handler,
   exchangeHistoryHandler,
   getRecentHistoryHandler,
-  getPastHistoryHandler
 );

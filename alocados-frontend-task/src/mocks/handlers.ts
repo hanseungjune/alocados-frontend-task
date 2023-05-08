@@ -90,27 +90,8 @@ export const exchangeHistoryHandler = rest.post<{
 });
 
 // 환전 이력 조회 API(최신순)
-export const getRecentHistoryHandler = rest.get("/api/history/0", (req, res, ctx) => {
-  // 최신순 정렬
-  historyArray.sort((a, b) => {
-    const dateA = new Date(a.regDt);
-    const dateB = new Date(b.regDt);
-    return dateB.getTime() - dateA.getTime(); 
-  })
-
-  return res(ctx.json(historyArray))
-})
-
-// 환전 이력 조회 API(오래된 순)
-export const getPastHistoryHandler = rest.get("/api/history/1", (req, res, ctx) => {
-  // 오래된순 정렬
-  historyArray.sort((a, b) => {
-    const dateA = new Date(a.regDt);
-    const dateB = new Date(b.regDt);
-    return dateA.getTime() - dateB.getTime(); 
-  })
-
-  return res(ctx.json(historyArray))
+export const getRecentHistoryHandler = rest.get("/api/recent", (req, res, ctx) => {
+  return res(ctx.status(200), ctx.json(historyArray.length > 10 ? historyArray.slice(0,10) : historyArray))
 })
 
 // 잔액 정보 API

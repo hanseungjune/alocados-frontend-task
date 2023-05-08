@@ -161,14 +161,14 @@ export const StyleExchangeRecentHistoryDiv = styled.div`
     font-size: 1.1rem;
     font-weight: 900;
     img:nth-of-type(1) {
-      margin-right: 0.5rem;
+      margin-right: 0.2rem;
     }
     img:nth-of-type(2) {
-      margin-right: 2rem;
-      margin-left: 2rem;
+      margin-right: 1rem;
+      margin-left: 1rem;
     }
     img:nth-of-type(3) {
-      margin-right: 0.5rem;
+      margin-right: 0.2rem;
     }
   }
 `

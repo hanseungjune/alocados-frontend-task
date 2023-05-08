@@ -3,7 +3,6 @@ import { color } from "../../Nav/Nav";
 
 export const StyleExchangeHistoryContainer = styled.div`
   width: 100vw;
-  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +10,9 @@ export const StyleExchangeHistoryContainer = styled.div`
 
 export const StyleExchangeHistoryHeader = styled.header`
   border-radius: 12px;
+  margin-bottom: 5px;
   background-color: ${color.primary};
+  width: 37vw;
   height: 6vh;
   display: flex;
   justify-content: space-between;
