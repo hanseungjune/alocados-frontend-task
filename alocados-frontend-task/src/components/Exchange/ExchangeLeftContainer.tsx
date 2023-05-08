@@ -11,8 +11,11 @@ const ExchangeLeftContainer = () => {
     { coin: ethImg, balance: 0 },
     { coin: bnbImg, balance: 0 },
   ])
+
+  // 잔액 조회
   const balances = useSelector((state:any) => state.balancesReducer)
 
+  // 잔액 변경 될때 마다 지속적으로 데이터 반영
   useEffect(() => {
     setOptions([
       { coin: solImg, balance: balances.balances['SOL'] },
@@ -23,6 +26,7 @@ const ExchangeLeftContainer = () => {
 
   return (
     <>
+    {/* 각 코인별 잔액 컴포넌트 */}
       <section>
         <h3>요약</h3>
         {options.map((item, index) => (

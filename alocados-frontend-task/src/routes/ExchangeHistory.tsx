@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import {
   StyleExchangeHistoryContainer,
@@ -8,17 +7,7 @@ import {
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import ExchangeRecentHistory from "../components/Exchange/ExchangeRecentHistory";
-
-export interface HistoryType {
-  regDt: string,
-  from: string,
-  to: string,
-  fromVal: string,
-  toVal: string,
-  fromImage: string,
-  toImage: string,
-  timestamp: string,
-}
+import { HistoryType } from "../components/Exchange/type/ExchangeType";
 
 const ExchangeHistory = () => {
   const [isSort, setIsSort] = useState(true);
@@ -45,12 +34,8 @@ const ExchangeHistory = () => {
     setRawHistories(sortedArrayAsc)
   }, [historyArray]);
 
-  useEffect(() => {
-    console.log(rawHistories)
-    console.log(sortedHistories)
-  }, [rawHistories, sortedHistories])
-
   return (
+    // 거래 내역 전체 페이지
     <StyleExchangeHistoryContainer>
       <div
         style={{
@@ -60,7 +45,7 @@ const ExchangeHistory = () => {
       >
         <h3>환전 내역</h3>
         <section>
-          {/* 항목 */}
+          {/* 거래 내역 헤더 */}
           <StyleExchangeHistoryHeader>
             <div onClick={handleSort}>
               {isSort ? (
@@ -77,14 +62,15 @@ const ExchangeHistory = () => {
               <span>환전금액</span>
             </div>
           </StyleExchangeHistoryHeader>
-          {/* 최근 순으로 환전 내역 보여주기 */}
-          {isSort === true ? rawHistories.map((item:any, index:number) => (
+          {/* 최근 순으로 거래 내역 보여주기 - 기본값 */}
+          {isSort === false ? rawHistories.map((item:any, index:number) => (
             <ExchangeRecentHistory
               key={index}
               history={item}
             />
           )) : null}
-          {isSort === false ? sortedHistories.map((item:any, index:number) => (
+          {/* 오래된 순으로 거래 내역 보여주기 */}
+          {isSort === true ? sortedHistories.map((item:any, index:number) => (
             <ExchangeRecentHistory
               key={index}
               history={item}

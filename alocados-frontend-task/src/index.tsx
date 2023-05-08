@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from './store/store';
 
+// MSW 서버 실행 코드
 if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser')
   worker.start()

@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { color } from "../../Nav/Nav";
+import { color } from '../../Nav/style/NavStyle';
 
+// 환전하기 페이지 전체
 export const StyleExchangeContainer = styled.div`
   width: 100vw;
   height: 80vh;
@@ -9,6 +10,7 @@ export const StyleExchangeContainer = styled.div`
   align-items: center;
 `;
 
+// 환전페이지 메인 화면 부분
 export const StyleExchangeSection = styled.section`
   width: 60vw;
   height: 50vh;
@@ -42,6 +44,7 @@ export const StyleExchangeSection = styled.section`
   }
 `;
 
+// 현재 각 코인 잔액 컴포넌트 스타일
 export const StyleExchangeSummaryDiv = styled.div`
   margin: 2vh 0vw;
   display: flex;
@@ -75,6 +78,7 @@ export interface StyleExchangeFromDivProps {
   fromValue : any
 }
 
+// 환전 기능 메인 스타일
 export const StyleExchangeFromDiv = styled.div<StyleExchangeFromDivProps>`
   display: flex;
   height: 7vh;
@@ -123,6 +127,7 @@ export const StyleExchangeFromDiv = styled.div<StyleExchangeFromDivProps>`
   }
 `
 
+// 자동으로 변환되어 입력되는 Div 스타일
 export const StyleExchangeConvertDiv = styled.div`
   height: 7vh;
   display: flex;
@@ -131,6 +136,7 @@ export const StyleExchangeConvertDiv = styled.div`
   margin: 1rem 0;
 `
 
+// 환전 버튼 스타일
 export const StyleExchangeCompleteBtn = styled.button`
   border: none;
   border-radius: 12px;
@@ -142,6 +148,7 @@ export const StyleExchangeCompleteBtn = styled.button`
   line-height: 7vh;
 `
 
+// 가장 최근 환전 내역 스타일
 export const StyleExchangeRecentHistoryDiv = styled.div`
   width: 37vw;
   height: 6vh;
@@ -172,3 +179,22 @@ export const StyleExchangeRecentHistoryDiv = styled.div`
     }
   }
 `
+
+// 환전 갱신창 스타일
+export const StyleRefetchAlert = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 8vh;
+  border-radius: 12px;
+  background-color: rgba(53, 85, 227, 0.12);
+  padding-left: 20px;
+  padding-right: 20px;
+  color: rgba(55, 86, 228, 1);
+
+  & > div > span {
+    font-size: 1.2rem;
+    font-weight: 900;
+    cursor: pointer;
+  }
+`;

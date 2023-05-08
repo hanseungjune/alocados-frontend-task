@@ -4,6 +4,7 @@ import Nav from './components/Nav/Nav';
 import Exchange from './routes/Exchange';
 import ExchangeDetail from './routes/ExchangeHistory';
 
+// 기본 세팅 스타일
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -18,6 +19,7 @@ function App() {
       <GlobalStyle/>
       <Router>
         <Routes>
+          {/* OutLet 설정 */}
           <Route element={<Nav/>}>
             <Route path="/" element={<Exchange/>}/>
             <Route path="/detail" element={<ExchangeDetail/>}/>

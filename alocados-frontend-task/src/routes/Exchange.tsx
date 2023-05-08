@@ -4,44 +4,38 @@ import {
   StyleExchangeContainer,
   StyleExchangeSection,
 } from "../components/Exchange/style/ExchangeStyle";
-import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExchangeAlert from "../components/Exchange/ExchangeAlert";
-
-export const StyleRefetchAlert = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 8vh;
-  border-radius: 12px;
-  background-color: rgba(53, 85, 227, 0.12);
-  padding-left: 20px;
-  padding-right: 20px;
-  color: rgba(55, 86, 228, 1);
-
-  & > div > span {
-    font-size: 1.2rem;
-    font-weight: 900;
-    cursor: pointer;
-  }
-`;
 
 const Exchange = () => {
   const [isAlert, setIsAlert] = useState(false);
 
+  // 경고창 끄기
   const handleAlert = () => {
     setIsAlert(!isAlert);
   };
+
+  // 3초 뒤에 자동으로 꺼지게 하기
+  useEffect(() => {
+    if (isAlert === true) {
+      const timeOut = setTimeout(() => {
+        setIsAlert(false);
+      }, 3000);
+      return () => {
+        clearTimeout(timeOut);
+      }
+    }
+  }, [isAlert])
 
   return (
     <StyleExchangeContainer>
       <div>
         <h3>환전하기</h3>
         {/* 거래시 갱신 alert 필요 */}
-        {isAlert ? <ExchangeAlert handleAlert={handleAlert} /> : null}
+        {isAlert ? <ExchangeAlert handleAlert={handleAlert}/> : null}
         <StyleExchangeSection>
           <ExchangeLeftContainer />
-          <ExchangeRightContainer />
+          <ExchangeRightContainer setIsAlert={setIsAlert}/>
         </StyleExchangeSection>
       </div>
     </StyleExchangeContainer>

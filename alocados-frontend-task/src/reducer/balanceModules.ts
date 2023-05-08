@@ -4,6 +4,7 @@ import ethImg from "../assets/eth.svg";
 import bnbImg from "../assets/bnb.svg";
 import convertCoin from "../utils/coinConverter";
 
+// 액션 이름 집합
 export const SET_BALANCES = "SET_BALANCES";
 export const SET_BALANCES_SUCCESS = "SET_BALANCES_SUCCESS";
 export const SET_BALANCES_FAILURE = "SET_BALANCES_FAILURE";
@@ -11,6 +12,8 @@ export const SET_HISTORY = "SET_HISTORY";
 export const SET_HISTORY_SUCCESS = "SET_HISTORY_SUCCESS";
 export const SET_HISTORY_FAILURE = "SET_HISTORY_FAILURE";
 
+// 액션 생성함수 이름 집합
+// 환전 관련 액션함수
 export const setBalances = (payload: any) => {
   return {
     type: SET_BALANCES,
@@ -31,6 +34,7 @@ export const setBalancesFailure = () => {
   };
 };
 
+// 이력 조회 관련 액션함수
 export const setHistory = (payload: any) => {
   return {
     type: SET_HISTORY,
@@ -51,6 +55,7 @@ export const setHistoryFailure = () => {
   };
 };
 
+// 초기값
 const initialState = {
   balances: {
     ETH: 2000,
@@ -61,19 +66,17 @@ const initialState = {
   status: false,
 };
 
-export interface todoProps {
-  id: number;
-}
-
+// 이미지 주소 받아오기 용
 const options = [
   { coin: solImg, unit: "SOL" },
   { coin: ethImg, unit: "ETH" },
   { coin: bnbImg, unit: "BNB" },
 ];
 
+// 환전 처리 후 거래 내역 처리 Saga (2가지)
 export function* exchangeCoinSaga(action: any): Generator<any, any, any> {
-  // 환전 하기
   try {
+    // 환전 처리 하기
     const { fromCoin, toCoin, fromValue } = action.payload;
     const response = yield fetch("/api/exchange", {
       method: "POST",
@@ -98,8 +101,10 @@ export function* exchangeCoinSaga(action: any): Generator<any, any, any> {
       .toString()
       .padStart(2, "0")}`;
 
+    // 거래 내역 날짜
     const regDt = `${year}-${month}-${date}, ${AMPM} ${hours}:${minutes}`;
 
+    // 코인 단위
     const from = data.from
     const to = data.to
 
@@ -117,7 +122,7 @@ export function* exchangeCoinSaga(action: any): Generator<any, any, any> {
       maximumFractionDigits: 2,
     });
 
-    // 환전한 내역 추가하기
+    // 환전 내역 추가 및 저장
     const response2 = yield fetch("/api/history", {
       method: "POST",
       body: JSON.stringify({ regDt, from, to, fromVal, toVal, fromImage, toImage }),
@@ -144,6 +149,7 @@ export function* exchangeCoinSaga(action: any): Generator<any, any, any> {
   }
 }
 
+// 환전 및 환전 내역 관련 리듀서 
 export const balancesReducer = (state: any = initialState, action: any): any => {
   switch (action.type) {
     case "SET_BALANCES_SUCCESS":

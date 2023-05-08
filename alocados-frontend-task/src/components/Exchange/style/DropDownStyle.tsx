@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
-import { color } from '../../Nav/Nav';
+import { color } from '../../Nav/style/NavStyle';
 
+// 드롭다운 선택시 버튼 스타일
 export const SelectedItemButton = styled.button`
   width: 9rem;
   height: 8.5vh;
@@ -26,6 +27,7 @@ export const SelectedItemButton = styled.button`
   }
 `;
 
+// 드롭다운 천천히
 export const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -37,6 +39,7 @@ export const fadeIn = keyframes`
   }
 `;
 
+// 드롭다운 스타일
 export const MenuItemsList = styled.ul<{ isDrop: boolean }>`
   position: absolute;
   top: 100%;
@@ -65,6 +68,7 @@ export const MenuItemsList = styled.ul<{ isDrop: boolean }>`
   }
 `;
 
+// 드롭다운 선택 스타일
 export const MenuItemButton = styled.button`
   display: flex;
   align-items: center;

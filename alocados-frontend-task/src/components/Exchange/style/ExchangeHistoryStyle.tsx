@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { color } from "../../Nav/Nav";
+import { color } from '../../Nav/style/NavStyle';
 
+// 거래내역 스타일
 export const StyleExchangeHistoryContainer = styled.div`
   width: 100vw;
   display: flex;
@@ -8,6 +9,7 @@ export const StyleExchangeHistoryContainer = styled.div`
   align-items: center;
 `;
 
+// 거래내역 헤더 스타일
 export const StyleExchangeHistoryHeader = styled.header`
   border-radius: 12px;
   margin-bottom: 5px;

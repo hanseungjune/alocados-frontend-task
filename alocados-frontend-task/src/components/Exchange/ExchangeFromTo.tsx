@@ -17,7 +17,7 @@ const ExchangeFromTo = ({
   setError
 }: ExchangeFromToProps) => {
   const [convertValue, setConvertValue] = useState<any>('');
-  // 입력 받기
+  // 환전 금액 받기
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e?.target?.value;
     if (/^\d{0,9}(\.\d*)?$/.test(inputValue)) {
@@ -37,10 +37,12 @@ const ExchangeFromTo = ({
     }
   };
   
+  // 타 코인 환전 가능 금액 자동 계산
   useEffect(() => {
     setConvertValue(convertCoin(fromCoin, toCoin, fromValue))
   }, [fromValue, convertValue, toCoin])
 
+  // 환전시 금액 초기화
   useEffect(() => {
     setFromValue('')
     setConvertValue('')
@@ -48,6 +50,7 @@ const ExchangeFromTo = ({
 
   return (
     <StyleExchangeFromDiv fromValue={fromValue}>
+      {/* 금액 입력창 */}
       <div>
         <span>{title}</span>
         <input
@@ -57,6 +60,7 @@ const ExchangeFromTo = ({
           onChange={handleValue}
         />
       </div>
+      {/* 드롭다운 컴포넌트 */}
       <div>
         <DropDownMenu
           text={value}

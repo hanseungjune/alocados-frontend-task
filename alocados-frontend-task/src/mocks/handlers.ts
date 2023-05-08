@@ -88,13 +88,3 @@ export const exchangeHistoryHandler = rest.post<{
     regDt, from, fromVal, to, toVal
   }))
 });
-
-// 환전 이력 조회 API(최신순)
-export const getRecentHistoryHandler = rest.get("/api/recent", (req, res, ctx) => {
-  return res(ctx.status(200), ctx.json(historyArray.length > 10 ? historyArray.slice(0,10) : historyArray))
-})
-
-// 잔액 정보 API
-export const balance_handler = rest.get("/api/balances", (req, res, ctx) => {
-  return res(ctx.status(200), ctx.json({ balances }));
-});

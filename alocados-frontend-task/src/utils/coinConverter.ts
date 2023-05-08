@@ -1,4 +1,4 @@
-// 환전 가능 여부 확인(비율 계산)
+// 각 코인별 상대 대비 환전 비율 및 금액 자동 계산 유틸 구현해놓기
 export const exchange = (from:any, to:any, amount:any) => {
   let exchangeRate: Record<string, number> = { ETH: 0, SOL: 0, BNB: 0}
   if (from === 'ETH') {
@@ -25,6 +25,7 @@ export const exchange = (from:any, to:any, amount:any) => {
   return amount * rate;
 }
 
+// 결과 로직
 const convertCoin = (from = "ETH", to = "SOL", amount = 2000) => {
   let result = exchange(from, to, amount);
   return result;

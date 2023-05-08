@@ -6,22 +6,20 @@ import { useEffect, useState } from 'react';
 const ExchangeRecentHistory = ({
   history
 }: ExchangeRecentHistoryProps) => {
-  const [isHistory, setHistory] = useState<boolean>(false);
+  const [isHistory, setIsHistory] = useState<boolean>(false);
 
+  // 환전 내역 여부에 따라
   useEffect(() => {
     if (history) {
-      setHistory(true)
+      setIsHistory(true)
     } else {
-      setHistory(false)
+      setIsHistory(false)
     }
-    console.log(history)
-    console.log(isHistory)
-  }, [history, isHistory])
-
-  
+  }, [history])
 
   return (
     <StyleExchangeRecentHistoryDiv>
+      {/* 거래내역 컴포넌트 */}
       {isHistory ? <>
         <div>
           <span>{history.regDt}</span>
